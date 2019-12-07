@@ -1,6 +1,6 @@
-class CreateSkills < ActiveRecord::Migration
+class CreateProjects < ActiveRecord::Migration
   def change
-  create_table :skills do |t|
+  create_table :projects do |t|
      t.string  :degree  
      t.integer :experience  
      t.string  :projects
