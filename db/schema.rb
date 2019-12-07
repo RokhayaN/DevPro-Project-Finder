@@ -11,6 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20191207011054) do
+
+  create_table "candidates", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "username"
+    t.string "email"
+    t.string "password"
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string  "degree"
+    t.integer "experience"
+    t.string  "projects"
+    t.string  "communication_skills"
+    t.string  "work_ethic"
+  end
 
 end
