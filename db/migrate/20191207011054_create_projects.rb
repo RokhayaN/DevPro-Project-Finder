@@ -4,6 +4,7 @@ class CreateProjects < ActiveRecord::Migration
      t.string  :name 
      t.string  :content 
      t.string  :fuctionality
+     t.integer :engineer_id
    end 
   end
 end

@@ -18,13 +18,14 @@ ActiveRecord::Schema.define(version: 20191207011054) do
     t.string "last_name"
     t.string "username"
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string "name"
-    t.string "content"
-    t.string "fuctionality"
+    t.string  "name"
+    t.string  "content"
+    t.string  "fuctionality"
+    t.integer "engineer_id"
   end
 
 end
