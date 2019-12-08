@@ -12,19 +12,16 @@ class ApplicationController < Sinatra::Base
   get "/" do
     erb :homepage 
   end
-  helpers do 
-    
-   def current_user=Engineer.find_by_id(session[:Engineer_id] 
-    if !! session[:teacher_id]
+   helpers do 
+
+    def logged_in?
+      !!session[:engineer_id]
+    end 
+
+    def current_user 
+      @current_user ||= Engineer.find_by(id: session[:engineer_id])
+    end 
+
   end 
-  
-   def logged_in?
-      !!current_user
-    end
-  end 
-end 
-    
-    
-    
-    
-    
+
+end
