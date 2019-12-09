@@ -1,0 +1,7 @@
+<h2>All Projects:</h2>
+
+
+	<% @projects.each do |project| %>
+	    <p><a href="/projects/<%= project.id %>"><%= project.name %></a></p>
+	<% end %>
+<p><a href ="/portofolio">Return</a></p> 

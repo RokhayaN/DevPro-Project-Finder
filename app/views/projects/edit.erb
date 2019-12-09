@@ -1,0 +1,22 @@
+<% if @project.engineer.id == Engineer.find(session[:engineer_id]).id %>
+	<h2>Edit a Project</h2>
+	<form method="POST" action="/projects/<%= @project.id%>">
+	    <input type="hidden" id="hidden" name="_method" value="PATCH">
+	    <br>
+	    <label>Name :</label>
+	    <input type="text" name="name" value="<%= @project.name %>"> 
+	    <br>
+	    <label>Content:</label>
+	    <input type="text" name="content" value ="<%= @project.content %>"
+	    <br>
+	    <br>
+	    <label>Functionality:</label>
+	    <input type="text" name="functionality" value ="<%= @project.functionality %>"
+	    <br>
+	    <br>
+           
+	    <input type="submit" value ="Submit">
+	</form>
+	<% else %>
+	<h2>This request is not authorize</h2>
+	<% end %>
