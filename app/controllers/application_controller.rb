@@ -7,6 +7,9 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "Hakuna Matata"
+    
+    get '/' do 
+      erb:homepage
   
  get "/signup" do
 	    erb :signup
