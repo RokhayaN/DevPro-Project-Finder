@@ -7,19 +7,18 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "Hakuna Matata"
-   end 
+  end 
     get '/' do 
       erb:homepage
-  end 
- get "/signup" do
+    end 
+   get "/signup" do
 	    erb :signup
-	  end
-
+	 end
 
 	  post "/signup" do
 	    if params[:username].empty?
 	      redirect '/failure'
-	    end
+	  end
 	    
 	    user = Engineer.new(:username => params[:username], :password => params[:password])
 			if user.save
@@ -43,7 +42,7 @@ end
 	 
 	    if user && user.authenticate(params[:password])
 	      session[:engineer_id] = user.id
-	      redirect "/account"
+	      redirect "/portofolio"
 	    else
 	      redirect "/failure"
 	    end
