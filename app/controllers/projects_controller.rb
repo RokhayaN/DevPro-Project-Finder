@@ -38,8 +38,6 @@ class ProjectsController < ApplicationController
 	            redirect "/projects"
 	          end
 	        end
-
-
 	      end
 	    
 	      get "/projects/:id/edit" do
