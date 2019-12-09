@@ -62,5 +62,5 @@ class ProjectsController < ApplicationController
 	        @project = Project.find_by(id: params[:id])
 	        @project.delete
 	        redirect "/portofolio"
-	      end
-	end
+	     end
+	   end
