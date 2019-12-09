@@ -28,7 +28,7 @@ class ApplicationController < Sinatra::Base
 	    end
 	 end
 end 
-	  get ‘/portofolio’ do
+	  get "/portofolio"do
 	    @engineer = Engineer.find(session[:engineer_id])
 	    erb :portofolio
 	  end
@@ -66,10 +66,8 @@ end
 	    end
 
 
-	    def current_user
-	      Engineer.find(session[:engineer_id])
-	    end
-	  end
-
-
-	end
+	 def current_user
+	   Engineer.find(session[:engineer_id])
+	 end
+	end 
+	
