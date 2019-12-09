@@ -1,5 +1,4 @@
-require_relative './config/environment'
-require_relative './app/models/engineer'
+
 class ApplicationController < Sinatra::Base
 
   configure do
