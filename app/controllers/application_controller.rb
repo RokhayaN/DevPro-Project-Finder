@@ -7,17 +7,17 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, "Hakuna Matata"
   end 
-    get '/' do 
+  get '/' do 
       erb:homepage
-    end 
-   get "/signup" do
+  end 
+  get "/signup" do
 	    erb :signup
-	 end
+	end
 
-	  post "/signup" do
+	post "/signup" do
 	    if params[:username].empty?
 	      redirect '/failure'
-	  end
+	    end
 	    
 	    user = Engineer.new(:username => params[:username], :password => params[:password])
 			if user.save
@@ -25,47 +25,48 @@ class ApplicationController < Sinatra::Base
 	    else
 	      redirect "/failure"
 	    end
-	 end
-end 
-	  get "/portofolio"do
+  end
+
+	get "/portofolio" do
 	    @engineer = Engineer.find(session[:engineer_id])
 	    erb :portofolio
-	  end
+	end
 
-	  get "/login" do
-	    erb :login
-	  end
+  get "/login" do
+    erb :login
+  end
 
-	  post "/login" do
-	    user = Engineer.find_by(:username => params[:username])
+	post "/login" do
+	  user = Engineer.find_by(:username => params[:username])
 	 
-	    if user && user.authenticate(params[:password])
+	  if user && user.authenticate(params[:password])
 	      session[:engineer_id] = user.id
 	      redirect "/portofolio"
-	    else
+	  else
 	      redirect "/failure"
-	    end
 	  end
+  end
 
 
-	  get "/failure" do
-	    erb :failure
-	  end
+	get "/failure" do
+	   erb :failure
+	end
 
 
-	  get "/logout" do
-	    session.clear
-	    redirect "/"
-	  end
+	get "/logout" do
+	   session.clear
+	   redirect "/"
+	end
 	  
-	  helpers do
-	    def logged_in?
+	helpers do
+	  def logged_in?
 	      !!session[:engineer_id]
-	    end
+	  end
 
 
-	 def current_user
+    def current_user
 	   Engineer.find(session[:engineer_id])
-	 end
+	  end
 	end 
+end 
 	
