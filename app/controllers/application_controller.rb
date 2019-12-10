@@ -19,8 +19,8 @@ class ApplicationController < Sinatra::Base
 	      redirect '/failure'
 	    end
 	    
-	    user = Engineer.new(:username => params[:username], :password => params[:password])
-			if user.save
+	    engineer = Engineer.new(:username => params[:username], :password => params[:password])
+			if engineer.save
 	      redirect "/login"
 	    else
 	      redirect "/failure"
@@ -37,10 +37,10 @@ class ApplicationController < Sinatra::Base
   end
 
 	post "/login" do
-	  user = Engineer.find_by(:username => params[:username])
+	  engineer = Engineer.find_by(:username => params[:username])
 	 
-	  if user && user.authenticate(params[:password])
-	      session[:engineer_id] = user.id
+	  if engineer && engineer.authenticate(params[:password])
+	      session[:engineer_id] = engineer.id
 	      redirect "/portofolio"
 	  else
 	      redirect "/failure"
@@ -68,5 +68,5 @@ class ApplicationController < Sinatra::Base
 	   Engineer.find(session[:engineer_id])
 	  end
 	end 
-end 
+end  
 	
