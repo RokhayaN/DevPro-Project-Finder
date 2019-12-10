@@ -18,8 +18,8 @@ class ProjectsController < ApplicationController
 	      end
 	    
 	      post "/projects" do 
-	        user = Engineer.find_by(id: params[:engineer_id])
-	        project = user.projects.build(params)
+	        engineer = Engineer.find_by(id: params[:engineer_id])
+	        project = engineer.projects.build(params)
 	        if project.save
 	            redirect "/portofolio"
 	        else
