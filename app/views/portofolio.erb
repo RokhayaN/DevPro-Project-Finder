@@ -6,6 +6,6 @@
 	<p><a href="/projects/new">Add Projects</a></p>
        <p><a href="/logout">Log Out</a></p>
 	<% @engineer.projects.each do |project| %>
-	    <p><a href="/projecs/<%= project.id %>"><%= project.name %></a></p>
+	    <p><a href="/projects/<%= project.id %>"><%= project.name %></a></p>
 	<% end %>
 	<p><a href="/projects">View projects from all engineers</a></p>
