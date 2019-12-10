@@ -21,7 +21,7 @@
 	    end
 
 
-	    get '/sorry_signup' do
+	    get '/error' do
 	        erb :'/failure'
 	    end
 
