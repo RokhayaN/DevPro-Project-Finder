@@ -1,6 +1,5 @@
  class EngineersController < ApplicationController
-
-
+   
 	    get '/signup' do
 	        if !logged_in?
 	            erb :'/signup'

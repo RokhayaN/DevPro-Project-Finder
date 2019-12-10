@@ -1,66 +1,111 @@
 class ProjectsController < ApplicationController
 
-	    get "/projects" do
-	        @projects = Project.all
-	        erb :"projects/index"
+
+	    get '/projects' do
+	        if logged_in?
+	            @projects = Project.all.order(:name)
+	            erb :'/projects/index'
+	        else
+	            redirect '/login'
+	        end
+	    end
+
+
+	    get '/projects/new' do
+	        if logged_in?
+	            erb :'/projects/new'
+	        else
+	            redirect '/login'
+	        end
+	    end
+
+
+	    post '/projects'do
+	        if logged_in?
+	             if params[:name]!= "" && params[:content] != ""
+	                 @project=Project.new(params)
+	                 @project.engineer=current_user
+	                 @project.save
+	                 redirect '/projects/#{@project.id}' 
+	             else
+	                 redirect '/projects/new'
+	             end
+	         else
+	             redirect '/login'
+	         end
 	     end
-	    
-	      get "/projects/new" do
-	        if(session[:engineer_id])
-	          @current_user = Engineer.find(session[:engineer_id])
+
+
+	     get '/projects/portofolio' do
+	        if logged_in?
+	            @projects=current_user.projects.order(:name)
+	            erb :'/projects/portofolio'
 	        else
-	          redirect '/failure'
-	        end
-	    
-	        
-	       @engineers = Engineer.all
-	        erb :"projects/new"
-	      end
-	    
-	      post "/projects" do 
-	        engineer = Engineer.find_by(id: params[:engineer_id])
-	        project = engineer.projects.build(params)
-	        if project.save
-	            redirect "/portofolio"
+	            redirect '/login'
+	        end      
+	    end
+
+
+	    get '/projects/:id' do
+	        if logged_in?
+	            @projects=Project.find_by_id(params[:id])
+	            if current_user.projects.include?(@project)
+	                @own_project=@project
+	            end
+	            erb :'/projects/show'
 	        else
-	            redirect "projects/new"
+	            redirect '/login'
 	        end
-	      end
-	    
-	      get '/projects/:id' do
-	        if(!session[:engineer_id])
-	          redirect '/failure'
-	        else 
-	          @project = Project.find_by(id: params[:id])
-	          if @project
-	            erb :"projects/show"
-	          else
-	            redirect "/projects"
-	          end
-	        end
-	      end
-	    
-	      get "/projects/:id/edit" do
-	        @project = Project.find_by(id: params[:id])
-	        if(!!session[:engineer_id])
-	          erb :'projects/edit'
+	    end
+
+
+	    get '/projects/:id/edit' do
+	        if logged_in?
+	            @project=current_user.projects.find_by_id(params[:id])
+	            if @project
+	                erb :'/projects/edit'
+	            else
+	                redirect 'projects/error'
+	            end
 	        else
-	          redirect '/failure'
+	            redirect '/login'
 	        end
-	      end
-	    
-	      patch "/projects/:id" do
-	        @project = Project.find_by(id: params[:id])
-	        if @project.update(name: params[:name], content: params[:content], functionality: params[:functionality])
-	            redirect "/projects/#{@project.id}"
+	    end
+
+
+	    patch '/projects/:id' do
+	        if logged_in?
+	            if params[:name] != "" && params[:content] != ""
+	                @project=Project.find_by_id(params[:id])
+	                @project.update(name: params[:name],content: params[:content],functionality: params[:functionality])
+	                redirect '/projects/#{@project.id}' 
+	            else
+	                redirect '/projects/#{params[:id]}/edit'
+	            end
 	        else
-	            redirect "/projects/#{@project.id}/edit"
+	            redirect '/login'
 	        end
-	      end
-	    
-	      delete "/projects/:id" do
-	        @project = Project.find_by(id: params[:id])
-	        @project.delete
-	        redirect "/portofolio"
-	     end
-	   end
+	    end
+
+
+	    get '/error' do
+	        erb :'/projects/error'
+	    end
+
+
+	    delete '/projects/:id/delete' do
+	        if logged_in?
+	            @project= current_user.projects.find_by_id(params[:id])
+	            if @project
+	                @project.delete
+	                redirect '/projects'
+	            else
+	                redirect '/error'
+           end
+	        else
+	            redirect 'login'
+	        end
+	    end 
+
+
+	end
