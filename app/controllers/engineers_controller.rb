@@ -14,7 +14,7 @@
 	            session[:engineer_id]=@engineer.id
 	            redirect '/projects'  
 	        else  
-	            redirect '/engineers/failure'
+	            redirect '/failure'
 	        end
 	    end
 
@@ -39,7 +39,7 @@
 				session[:engineer_id] = @engineer.id
 				redirect '/projects'
 			else
-				redirect '/engineers/failure'
+				redirect '/failure'
 	        end
 	    end
 
@@ -51,7 +51,7 @@
 
 	    get '/logout' do
 	        if logged_in?
-	            erb :'engineers/logout'
+	            erb :'/engineers/logout'
 	        else
 	            redirect to "/"
 	        end 
