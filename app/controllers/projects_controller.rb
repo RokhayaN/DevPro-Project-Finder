@@ -64,7 +64,7 @@ class ProjectsController < ApplicationController
 	            if @project
 	                erb :'/projects/edit'
 	            else
-	                redirect 'projects/error'
+	                redirect '/projects/error'
 	            end
 	        else
 	            redirect '/login'
@@ -82,7 +82,7 @@ class ProjectsController < ApplicationController
 	                redirect '/projects/#{params[:id]}/edit'
 	            end
 	        else
-	            redirect '/login'
+	            redirect'/login'
 	        end
 	    end
 
@@ -102,7 +102,7 @@ class ProjectsController < ApplicationController
 	                redirect '/error'
            end
 	        else
-	            redirect 'login'
+	            redirect '/login'
 	        end
 	    end 
 
