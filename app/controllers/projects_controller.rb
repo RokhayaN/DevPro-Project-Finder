@@ -1,22 +1,21 @@
 class ProjectsController < ApplicationController
   
-	    get '/projects' do
-	        if logged_in?
-	            @projects = Project.all.order(:name)
-	            erb :'/projects/index'
-	        else
-	            redirect '/login'
-	        end
+	    get'/projects'do
+	       if logged_in?
+	         @projects = Project.all.order(:name)
+	         erb :'/projects/index'
+	       else
+	         redirect '/login'
+	       end
 	    end
-
 
 	    get '/projects/new' do
 	        if logged_in?
-	            erb :'/projects/new'
+	           erb :'/projects/new'
 	        else
-	            redirect '/login'
+	           redirect '/login'
 	        end
-	    end
+	     end
 
 
 	    post '/projects'do
@@ -25,12 +24,12 @@ class ProjectsController < ApplicationController
 	                 @project=Project.new(params)
 	                 @project.engineer=current_user
 	                 @project.save
-	                 redirect '/projects/#{@project.id}' 
+	                 redirect '/projects/#{@project.id}'
 	             else
-	                 redirect '/projects/new'
+	               redirect '/projects/new'
 	             end
 	         else
-	             redirect '/login'
+	           redirect '/login'
 	         end
 	     end
 
@@ -97,12 +96,12 @@ class ProjectsController < ApplicationController
 	            @project= current_user.projects.find_by_id(params[:id])
 	            if @project
 	                @project.delete
-	                redirect '/projects'
+	               redirect '/projects'
 	            else
-	                redirect '/error'
+	               redirect '/error'
            end
 	        else
-	            redirect '/login'
+	           redirect '/login'
 	        end
 	    end 
 
