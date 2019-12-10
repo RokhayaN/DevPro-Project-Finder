@@ -14,19 +14,19 @@
 	            session[:engineer_id]=@engineer.id
 	            redirect '/projects'  
 	        else  
-	            redirect '/failure'
+	            redirect '/engineers/failure'
 	        end
 	    end
 
 
-	    get '/error' do
-	        erb :'/failure'
+	    get '/failure' do
+	        erb :'/engineers/failure'
 	    end
 
 
 	    get '/login' do
 	        if !logged_in?
-	            erb :'/login'
+	            erb :'/engineers/login'
 	        else
 	            redirect '/project' 
 	        end
@@ -39,19 +39,19 @@
 				session[:engineer_id] = @engineer.id
 				redirect '/projects'
 			else
-				redirect '/failure'
+				redirect '/engineers/failure'
 	        end
 	    end
 
 
 	    get '/failure' do
-	        erb :'/failure'
+	        erb :'engineers/failure'
 	    end
 
 
 	    get '/logout' do
 	        if logged_in?
-	            erb :'/logout'
+	            erb :'engineers/logout'
 	        else
 	            redirect to "/"
 	        end 
