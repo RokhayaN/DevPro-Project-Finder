@@ -28,7 +28,7 @@
 	        if !logged_in?
 	            erb :'/engineers/login'
 	        else
-	            redirect '/project' 
+	            redirect '/projects' 
 	        end
 	    end
 
@@ -45,7 +45,7 @@
 
 
 	    get '/failure' do
-	        erb :'engineers/failure'
+	        erb :'/engineers/failure'
 	    end
 
 
