@@ -1,4 +1,3 @@
-
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -15,7 +14,7 @@ class ApplicationController < Sinatra::Base
 	end
 
 	post "/signup" do
-	    if params[:engineer].all.empty?
+	    if params[:engineer].empty?
 	      redirect '/failure'
 	    end
 	    
