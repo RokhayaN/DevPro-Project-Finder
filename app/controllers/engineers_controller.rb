@@ -64,4 +64,5 @@
 	        session.destroy
 	        redirect "/"
 	    end
+end       
 
