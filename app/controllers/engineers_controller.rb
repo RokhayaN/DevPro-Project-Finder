@@ -2,13 +2,11 @@
    
 	    get '/signup' do
 	        if !logged_in?
-	            erb :'/signup'
+	            erb :'/engineers/signup'
 	        else
-	            redirect '/projects'
+	           redirect'/projects'
 	        end
 	    end
-
-
 	    post '/signup' do
 	        if valid_signup? && !not_valid_username && !not_valid_email
 	            @engineer=Engineer.new(params) 
@@ -16,7 +14,7 @@
 	            session[:engineer_id]=@engineer.id
 	            redirect '/projects'  
 	        else  
-	            redirect 'failure'
+	            redirect '/failure'
 	        end
 	    end
 
@@ -47,7 +45,7 @@
 
 
 	    get '/failure' do
-	        erb :'failure'
+	        erb :'/failure'
 	    end
 
 
