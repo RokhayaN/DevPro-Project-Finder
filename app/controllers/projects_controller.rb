@@ -35,7 +35,7 @@ class ProjectsController < ApplicationController
 	     end
 
 
-	     get '/portofolio' do
+	     get 'projects/portofolio' do
 	        if logged_in?
 	            @projects =current_user.projects.order(:name) 
 	            erb :'/projects/portofolio'
