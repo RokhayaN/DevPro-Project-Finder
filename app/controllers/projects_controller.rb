@@ -13,22 +13,22 @@ class ProjectsController < ApplicationController
 	       erb :'/projects/new'
 	    end
 	     
+post '/projects' do 
+	       # binding.pry
+	       if  params[:name] == "" || params[:content] == ""  || params[:funtionality] == "" 	          
+                  redirect '/projects/new'        
+	       end
+	        engineer = current_user.engineers.build(name: params[:name],content: params[:content], functionality: params[:functionality])
+	        if engineer.save
+	            redirect '/projects'            
+	        else
+	            redirect '/projects/new'  
+	        end         
+	    end 
 
 
-	    post '/projects'do
-	        if logged_in?
-	             if params[:name]!= "" && params[:content] != ""
-	                 @project=Project.new(params)
-	                 @project.engineer=current_user
-	                 @project.save
-	                 redirect '/projects/#{@project.id}'
-	             else
-	               redirect '/projects/new'
-	             end
-	         else
-	           redirect '/login'
-	         end
-	     end
+	    
+	         
 
 
 	     get '/projects/portofolio' do
