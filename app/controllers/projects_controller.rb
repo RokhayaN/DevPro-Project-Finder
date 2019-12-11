@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
 	            @projects = Project.all.order(:name)
 	            erb :'/projects/index'
 	        else
-	            redirect '/login'
+	            redirect'/login'
 	        end
 	    end
 
@@ -14,23 +14,23 @@ class ProjectsController < ApplicationController
 	        if logged_in?
 	            erb :'/projects/new'
 	        else
-	            redirect '/login'
+	            redirect'/login'
 	        end
 	    end
 
 
-	    post '/projects' do
+	    post'/projects' do
 	        if logged_in?
 	             if params[:name]!= "" && params[:content] != ""
 	                 @project=Project.new(params)
 	                 @project.engineer=current_user
 	                 @project.save
-	                 redirect '/projects/#{@project.id}' 
+	                 redirect'/projects/#{@project.id}' 
 	             else
-	                 redirect '/projects/new'
+	                 redirect'/projects/new'
 	             end
 	         else
-	             redirect '/login'
+	             redirect'/login'
 	         end
 	     end
 
@@ -40,7 +40,7 @@ class ProjectsController < ApplicationController
 	            @projects =current_user.projects.order(:name) 
 	            erb :'/projects/portofolio'
 	        else
-	            redirect '/login'
+	           redirect'/login'
 	        end      
 	    end
 
@@ -53,7 +53,7 @@ class ProjectsController < ApplicationController
 	            end
 	            erb :'/projects/show'
 	        else
-	            redirect '/login'
+	            redirect'/login'
 	        end
 	    end
 
@@ -64,10 +64,10 @@ class ProjectsController < ApplicationController
 	            if @project
 	                erb :'/projects/edit'
 	            else
-	                redirect '/error'
+	                redirect'/error'
 	            end
 	        else
-	            redirect '/login'
+	            redirect'/login'
 	        end
 	    end
 
@@ -77,12 +77,12 @@ class ProjectsController < ApplicationController
 	            if params[:name] != "" && params[:content] != ""
 	                @project=Project.find_by_id(params[:id])
 	                @project.update(name: params[:name],content: params[:content],functionality: params[:functionality])
-	                redirect '/projects/#{@project.id}' 
+	                redirect'/projects/#{@project.id}' 
 	            else
-	                redirect '/projects/#{params[:id]}/edit' 
+	                redirect'/projects/#{params[:id]}/edit' 
 	            end
 	        else
-	            redirect '/login'
+	            redirect'/login'
 	        end
 	    end
 
@@ -97,12 +97,12 @@ class ProjectsController < ApplicationController
 	            @project = current_user.projects.find_by_id(params[:id])
 	            if @project
 	                @project.delete
-	                redirect '/projects'
+	                redirect'/projects'
 	            else
-	                redirect '/error'
+	               redirect'/error'
 	            end
 	        else
-	            redirect 'login'
+	           redirect'login'
 	        end
    end
 end 
