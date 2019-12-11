@@ -26,11 +26,6 @@ post '/projects' do
 	        end         
 	    end 
 
-
-	    
-	         
-
-
 	     get '/projects/portofolio' do
 	        if logged_in?
 	            @projects=current_user.projects.order(:name)
@@ -40,18 +35,22 @@ post '/projects' do
 	        end      
 	    end
 
-
-	    get '/projects/:id' do
+ get '/projects/:id' do 
 	        if logged_in?
-	            @projects=Project.find_by_id(params[:id])
-	            if current_user.projects.include?(@project)
-	                @own_project=@project
-	            end
-	            erb :'/projects/show'
-	        else
-	            redirect '/login'
-	        end
-	    end
+	            engineer = current_user
+	            @engineer = engineer.projects.find_by(id: params[:id])
+	            if @engineer 
+	                erb :'projects/show'
+	            else  
+	                redirect '/projects'
+	            end 
+	        else 
+	            redirect "/login"
+	        end 
+	    end 
+
+	   
+	    
 
 
 	    get '/projects/:id/edit' do
