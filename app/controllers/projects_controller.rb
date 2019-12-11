@@ -48,58 +48,42 @@ post '/projects' do
 	            redirect "/login"
 	        end 
 	    end 
+ get '/projects/:id/edit' do 
+	        if current_user
+	            @engineer = current_user.projects.find_by(id: params[:id])
+	            erb :"projects/edit"
+	        else
+	            redirect "/login"
+	        end 
+	    end
+
+
+	    patch '/projects/:id' do 
+	        @engineer = current_user
+	        @projects = @engineer.projects.find_by(id: params[:id])
+	        if !@engineer
+	            redirect '/login'
+	        else
+	            @projects.update(name: params[:name],content: params[:content], functionality: params[:functionality])
+	            redirect "/projects/#{@projects.id}"
+	        end
+	    end 
+
+
+	    delete '/projects/:id' do 
+	        if !logged_in?
+	            redirect '/'
+	        else @project= current_user.projects.find_by(id: params[:id])
+	            @project.destroy
+	            redirect '/projects'
+	        end 
+	    end 
+
+
+	end
 
 	   
 	    
 
 
-	    get '/projects/:id/edit' do
-	        if logged_in?
-	            @project=current_user.projects.find_by_id(params[:id])
-	            if @project
-	                erb :'/projects/edit'
-	            else
-	                redirect '/projects/error'
-	            end
-	        else
-	            redirect '/login'
-	        end
-	    end
-
-
-	    patch '/projects/:id' do
-	        if logged_in?
-	            if params[:name] != "" && params[:content] != ""
-	                @project=Project.find_by_id(params[:id])
-	                @project.update(name: params[:name],content: params[:content],functionality: params[:functionality])
-	                redirect '/projects/#{@project.id}' 
-	            else
-	                redirect '/projects/#{params[:id]}/edit'
-	            end
-	        else
-	            redirect'/login'
-	        end
-	    end
-
-
-	    get '/error' do
-	        erb :'/projects/error'
-	    end
-
-
-	    delete '/projects/:id/delete' do
-	        if logged_in?
-	            @project= current_user.projects.find_by_id(params[:id])
-	            if @project
-	                @project.delete
-	               redirect '/projects'
-	            else
-	               redirect '/error'
-           end
-	        else
-	           redirect '/login'
-	        end
-	    end 
-
-
-	end
+	    
