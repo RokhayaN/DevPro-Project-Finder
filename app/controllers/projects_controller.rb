@@ -36,13 +36,13 @@ class ProjectsController < ApplicationController
 	     end
 
 
-	     get 'projects/portofolio' do
-	        if logged_in?
-	            @projects =current_user.projects.order(:name) 
-	            erb :'/projects/portofolio'
-	        else
-	           redirect'/login'
-	        end      
+	    # get 'projects/portofolio' do
+	       # if logged_in?
+	           # @projects =current_user.projects.order(:name) 
+	           # erb :'/projects/portofolio'
+	        #else
+	           #'/login'
+	       # end      
 	    end
 
 
@@ -79,9 +79,9 @@ class ProjectsController < ApplicationController
 	            if params[:name] != "" && params[:content] != ""
 	                @project=Project.find_by_id(params[:id])
 	                @project.update(name: params[:name],content: params[:content],functionality: params[:functionality])
-	                redirect'/projects/#{@project.id}' 
+	                redirect"/projects/#{@project.id}"
 	            else
-	                redirect'/projects/#{params[:id]}/edit' 
+	                redirect"/projects/#{params[:id]}/edit" 
 	            end
 	        else
 	            redirect'/login'
