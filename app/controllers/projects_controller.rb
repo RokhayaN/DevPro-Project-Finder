@@ -10,12 +10,9 @@ class ProjectsController < ApplicationController
 	    end
 
 	    get '/projects/new' do
-	        if logged_in?
-	           erb :'/projects/new'
-	        else
-	           redirect '/login'
-	        end
-	     end
+	       erb :'/projects/new'
+	    end
+	     
 
 
 	    post '/projects'do
