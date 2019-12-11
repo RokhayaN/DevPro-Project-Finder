@@ -15,7 +15,7 @@ class ApplicationController < Sinatra::Base
 	  helpers do
 
 	    def current_user
-	      @current_user ||= Engineer.find_by_id(session[:engineer_id]) if !! session[:engineer_id]
+	      @current_user ||= Engineer.find_by_id(session[:engineer_id]) if !!session[:engineer_id]
 	    end
 	    
 	    def logged_in?
