@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   
-	    get ‘/projects’ do
+	    get '/projects' do
 	        if logged_in?
 	            @projects = Project.all.order(:name)
 	            erb :'/projects/index'
