@@ -14,7 +14,7 @@
 	            if logged_in?
 	                redirect "/projects"
 	            else
-	                redirect to "/signup"
+	                redirect to "/failure"
 	            end
 	        end
 	    end
@@ -23,44 +23,25 @@
 	        erb :'/engineers/failure'
 	    end
 
-
-	    get '/login' do
-	        if !logged_in?
-	            erb :'/engineers/login'
-	        else
-	            redirect '/projects' 
-	        end
+  get '/login' do
+	        erb :'/engineers/login'
 	    end
 
 
 	    post '/login' do
-	        @engineer = Engineer.find_by(username: params[:username])
-		    if @engineer && @engineer.authenticate(params[:password])
-				session[:engineer_id] = @engineer.id
-				redirect '/projects'
-			else
-				redirect '/failure'
-	        end
-	    end
-
-
-	    get '/failure' do
-	        erb :'/engineers/failure'
-	    end
-
-
-	    get '/logout' do
-	        if logged_in?
-	            erb :'/engineers/logout'
+	        engineer = Engineer.find_by(username: params[:username])
+	        if engineer && engineer.authenticate(params[:username])
+	          session[:user_id] = engineer.id
+	          redirect '/projects'
 	        else
-	            redirect to "/"
-	        end 
-	    end
+	          redirect '/failure'
+	        end
+	      end
 
-
-	    post '/logout' do
-	        session.destroy
+	    get "/logout" do
+	        session.clear
 	        redirect "/"
 	    end
-end       
+	end 
 
+	    
