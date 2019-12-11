@@ -9,7 +9,7 @@
 	        if params[:username] == "" || params[:password] == "" || params[:email] == ""
 	            redirect to "/signup"
 	        else 
-	            engineer = Engineer.create(:username => params[:username], :email => params[:email], :password => params[:password]
+	            engineer = Engineer.create(:username => params[:username], :email => params[:email], :password => params[:password])
 	            session[:engineer_id] = engineer.id
 	            if logged_in?
 	                redirect "/projects"
@@ -42,6 +42,6 @@
 	        session.clear
 	        redirect "/"
 	    end
-	end 
+  end      
 
-	    
+end 	    
