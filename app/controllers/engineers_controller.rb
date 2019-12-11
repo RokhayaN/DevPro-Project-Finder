@@ -1,11 +1,10 @@
  class EngineersController < ApplicationController
 
-
-	    get '/signup' do
+	      get '/signup' do
 	        if !logged_in?
-	            erb :'/signup'
+	            erb :'/engineers/signup'
 	        else
-	            redirect ‘/projects’
+	            redirect '/projects'
 	        end
 	    end
 
@@ -15,23 +14,23 @@
 	            @engineer=Engineer.new(params) 
 	            @engineer.save
 	            session[:engineer_id]=@engineer.id
-	            redirect ‘/projects’   
+	            redirect '/projects'   
 	        else  
-	            redirect ‘/failure’
+	            redirect '/failure'
 	        end
 	    end
 
 
-	    get '/sorry_signup' do
-	        erb :’/failure’
+	    get '/failure' do
+	        erb :'/engineers/failure'
 	    end
 
 
 	    get '/login' do
 	        if !logged_in?
-	            erb :'/login'
+	            erb :'/engineers/login'
 	        else
-	            redirect ‘/project’ 
+	            redirect '/projects' 
 	        end
 	    end
 
@@ -40,21 +39,17 @@
 	        @engineer = Engineer.find_by(username: params[:username])
 		    if @engineer && @engineer.authenticate(params[:password])
 				session[:engineer_id] = @engineer.id
-				redirect “/projects”
+				redirect '/projects'
 			else
-				redirect “/failure”
+				redirect '/failure'
 	        end
 	    end
 
 
-	    get ‘/failure’ do
-	        erb :’failure’
-	    end
-
-
+	
 	    get '/logout' do
 	        if logged_in?
-	            erb :'/logout'
+	            erb :'engineers/logout'
 	        else
 	            redirect to "/"
 	        end 
