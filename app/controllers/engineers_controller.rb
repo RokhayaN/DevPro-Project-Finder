@@ -2,22 +2,22 @@
    
 	    get '/signup' do
 	        if !logged_in?
-	            erb :'/engineers/signup'
-	        else
-	           redirect'/projects'
+	         erb :'/engineers/signup'
+	       end
+	    
+	    post "/signup" do
+	        if params[:username] == "" || params[:password] == "" || params[:email] == ""
+	            redirect to "/signup"
+	        else 
+	            engineer = Engineer.create(:username => params[:username], :email => params[:email], :password => params[:password]
+	            session[:engineer_id] = engineer.id
+	            if logged_in?
+	                redirect "/projects"
+	            else
+	                redirect to "/signup"
+	            end
 	        end
 	    end
-	    post '/signup' do
-	        if valid_signup? && !not_valid_username && !not_valid_email
-	            @engineer=Engineer.new(params) 
-	            @engineer.save
-	            session[:engineer_id]=@engineer.id
-	            redirect '/projects'  
-	        else  
-	            redirect '/failure'
-	        end
-	    end
-
 
 	    get '/failure' do
 	        erb :'/engineers/failure'
