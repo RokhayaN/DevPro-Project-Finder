@@ -14,9 +14,9 @@
 	            @engineer=Engineer.new(params) 
 	            @engineer.save
 	            session[:engineer_id]=@engineer.id
-	            redirect '/projects'   
+	            redirect '/projects/index'   
 	        else  
-	           redirect '/failure' 
+	           redirect '/projects/index' 
 	        end
 	    end
 
