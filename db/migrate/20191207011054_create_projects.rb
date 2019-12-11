@@ -3,7 +3,7 @@ class CreateProjects < ActiveRecord::Migration
   create_table :projects do |t|
      t.string  :name 
      t.string  :content 
-     t.string  :fuctionality
+     t.string  :functionality
      t.integer :engineer_id
    end 
   end

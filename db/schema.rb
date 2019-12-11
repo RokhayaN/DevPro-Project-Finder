@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20191207011054) do
   create_table "projects", force: :cascade do |t|
     t.string  "name"
     t.string  "content"
-    t.string  "fuctionality"
+    t.string  "functionality"
     t.integer "engineer_id"
   end
 

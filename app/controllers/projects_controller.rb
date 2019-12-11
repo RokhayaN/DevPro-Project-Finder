@@ -2,7 +2,8 @@ class ProjectsController < ApplicationController
   
 	    get '/projects' do
 	        if logged_in?
-	            @projects = Project.all.order(:name)
+	          
+	            @projects = current_user.projects.order(:name)
 	            erb :'/projects/index'
 	        else
 	            redirect'/login'
@@ -25,7 +26,7 @@ class ProjectsController < ApplicationController
 	                 @project=Project.new(params)
 	                 @project.engineer=current_user
 	                 @project.save
-	                 redirect'/projects/#{@project.id}' 
+	                 redirect"/projects/#{@project.id}"
 	             else
 	                 redirect'/projects/new'
 	             end
@@ -47,7 +48,8 @@ class ProjectsController < ApplicationController
 
 	    get '/projects/:id' do
 	        if logged_in?
-	            @project=Project.find_by_id(params[:id])
+	            @project=current_user.projects.find_by_id(params[:id])
+	            
 	            if current_user.projects.include?(@project)
 	                @own_project=@project
 	            end
