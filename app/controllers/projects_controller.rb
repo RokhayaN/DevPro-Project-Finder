@@ -94,7 +94,7 @@ class ProjectsController < ApplicationController
 	    end
 
 
-	    delete '/projects/:id/delete' do
+	    delete '/projects/:id' do
 	        if logged_in?
 	            @project = current_user.projects.find_by_id(params[:id])
 	            if @project
