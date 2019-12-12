@@ -72,7 +72,7 @@ class ProjectsController < ApplicationController
 	                @project=current_user.projects.find_by_id(params[:id])
 	                if @project
 	                  @project.update(name: params[:name],content: params[:content],functionality: params[:functionality])
-	                  redirect"/projects#{@project.id}"
+	                  redirect"/projects/#{@project.id}"
 	                else
 	                  redirect"/projects"
 	                end 
