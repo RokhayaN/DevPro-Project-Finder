@@ -36,13 +36,13 @@ class ProjectsController < ApplicationController
 	     end
 
 
-	    # get 'projects/portofolio' do
-	       # if logged_in?
-	           # @projects =current_user.projects.order(:name) 
-	           # erb :'/projects/portofolio'
-	        #else
-	           #'/login'
-	       # end      
+	     get 'projects/index' do
+	        if logged_in?
+	            @projects =current_user.projects.order(:name) 
+	            erb :'/projects/index'
+	        else
+	           '/login'
+	        end      
 	    end
 
 
@@ -106,5 +106,6 @@ class ProjectsController < ApplicationController
 	        else
 	           redirect'login'
 	        end
-end
+  end
+end 
 
