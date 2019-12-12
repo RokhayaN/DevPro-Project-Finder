@@ -1,10 +1,13 @@
-<h2>Welcome to your projects portofolio:</h2>
+<h2>Welcome to your projects/portfolio:</h2>
 
+<p> Here are all your existing projects!</p>
 
 	<% @projects.each do |project| %>
 	    <p><a href="/projects/<%= project.id %>"><%= project.name %></a></p>
 	<% end %>
+	
+<p>Got a new project? Hit the button below:</p> 
 <p><a href ="/projects/new">Add project</a></p> 
 <br>
-<p>or exit from your account below :</p>
+<p>Satisfy with your portfolio? Exit from your account below :</p>
 <p><a href="/logout">Log Out</a></p>
