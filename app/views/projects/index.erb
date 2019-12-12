@@ -1,7 +1,9 @@
-<h2>All Projects:</h2>
+<h2>Welcome to your projects portofolio:</h2>
 
 
 	<% @projects.each do |project| %>
 	    <p><a href="/projects/<%= project.id %>"><%= project.name %></a></p>
 	<% end %>
 <p><a href ="/projects/new">Add project</a></p> 
+<br>
+<p><a href="/logout">Log Out</a></p>
