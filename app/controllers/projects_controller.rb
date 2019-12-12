@@ -106,5 +106,5 @@ class ProjectsController < ApplicationController
 	        else
 	           redirect'login'
 	        end
-   end
-end 
+end
+
