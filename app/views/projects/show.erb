@@ -1,7 +1,7 @@
 <h2><%= @project.name%></h2>
 <br>
 <br>
- <p>Project: <%= @project.name%></p>
+ <p>Name: <%= @project.name%></p>
 	<p>Content: <%= @project.content %></p>
 	<p>functionality: <%= @project.functionality %></p>
 	
@@ -10,8 +10,10 @@
 	    <input type="hidden" id="hidden" name="_method" value="DELETE">
 	    <input type="submit" value="Delete">
 	</form>
-
- 
+  <br>
+  <br>
 	<p><a href="/projects/<%= @project.id %>/edit">Edit</a></p>
+	<br>
+	<br>
 	<p><a href="/projects">Back</a></p>
 
